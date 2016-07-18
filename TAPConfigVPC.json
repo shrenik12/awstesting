@@ -1,7 +1,7 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
 
-  "Description" : "A Demo Application",
+  "Description" : "A TAP config Application",
 
   "Parameters" : {
     "KeyPairName": {
@@ -162,13 +162,13 @@
     "CPUAlarmHigh": {
      "Type": "AWS::CloudWatch::Alarm",
      "Properties": {
-        "AlarmDescription": "Scale-up if CPU > 50% for 4 minutes",
+        "AlarmDescription": "Scale-up if CPU > 90% for 4 minutes",
         "MetricName": "CPUUtilization",
         "Namespace": "AWS/EC2",
         "Statistic": "Average",
         "Period": "120",
         "EvaluationPeriods": "2",
-        "Threshold": "50",
+        "Threshold": "90",
         "AlarmActions": [ { "Ref": "ScaleUpPolicy" } ],
         "Dimensions": [
           {
@@ -183,13 +183,13 @@
     "CPUAlarmLow": {
      "Type": "AWS::CloudWatch::Alarm",
      "Properties": {
-        "AlarmDescription": "Scale-down if CPU < 50% for 4 minutes",
+        "AlarmDescription": "Scale-down if CPU < 90% for 4 minutes",
         "MetricName": "CPUUtilization",
         "Namespace": "AWS/EC2",
         "Statistic": "Average",
         "Period": "120",
         "EvaluationPeriods": "2",
-        "Threshold": "50",
+        "Threshold": "90",
         "AlarmActions": [ { "Ref": "ScaleDownPolicy" } ],
         "Dimensions": [
           {
@@ -215,8 +215,8 @@
                "echo 'hello' > ffff", "\n",
                "yum -y install nodejs npm --enablerepo=epel", "\n",
                "yum -y install git", "\n",
-               "git clone https://github.com/sharmp07/demo", "\n",
-               "node demo/app1.js &", "\n"
+               "git clone github.com/Priyanka-Patidar/testrepo", "\n",
+               "node testrepo/config.js &", "\n"
             ]
           ]}
         }
@@ -224,16 +224,5 @@
     }
 
   },
-
-  "Outputs" : {
-    "InstanceId1" : {
-      "Description" : "Instance Id 1",
-      "Value" : { "Ref" : "EC2Instance1" }
-    },
-    "InstanceId2" : {
-      "Description" : "Instance Id 2",
-      "Value" : { "Ref" : "EC2Instance2" }
-    }
-  }
 
 }
